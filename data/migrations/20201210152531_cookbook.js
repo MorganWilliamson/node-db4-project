@@ -22,12 +22,14 @@ exports.up = function(knex) {
     // Recipes
     .createTable('recipes', table => {
         table.increments('recipe_id');
-        table.string('step_name')
+        table.integer('step_id')
+            .unsigned()
             .notNullable()
-            .references('step_name').inTable('steps')
+            .references('step_id').inTable('steps')
             .onDelete('restrict').onUpdate('restrict');
-        table.string('ingredient_name')
-            .references('ingredient_name', 128).inTable('ingredients')
+        table.string('ingredient_id')
+            .unsigned()
+            .references('ingredient_id', 128).inTable('ingredients')
             .onDelete('restrict').onUpdate('restrict');
         table.string('unit_of_measure', 128)
             .references('unit_of_measure').inTable('measurements')
